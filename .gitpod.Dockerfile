@@ -9,11 +9,11 @@ RUN sudo apt update \
 
 ARG flutterSdkDownloadUrl="https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_2.2.3-stable.tar.xz"
 
-RUN cd $HOME \
- && wget -qO flutter_sdk.tar.xz $flutterSdkDownloadUrl \
- && tar -xvf flutter_sdk.tar.xz \
- && rm flutter_sdk.tar.xz
+WORKDIR $HOME
+RUN sudo wget -qO flutter_sdk.tar.xz $flutterSdkDownloadUrl \
+ && sudo tar -xvf flutter_sdk.tar.xz \
+ && sudo rm flutter_sdk.tar.xz
     
 ENV PATH="$PATH:$HOME/flutter/bin"
 
-RUN flutter precache
+RUN sudo $HOME/flutter/bin/flutter precache
